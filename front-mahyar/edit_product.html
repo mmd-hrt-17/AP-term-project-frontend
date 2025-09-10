@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8" />
+  <title>Edit Product</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0;
+      background: radial-gradient(circle at top, #360059, #1c002e);
+      background-attachment: fixed;
+      font-family: 'Vazirmatn', Tahoma, sans-serif;
+      direction: ltr;
+      color: #eee;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 120px 20px 40px;
+    }
+
+    h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 50px;
+      margin: 0;
+      padding: 30px 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      background-color: #1c1c1c;
+      color: #f5f5f5;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+      z-index: 10;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      max-width: 900px;
+      width: 100%;
+      background-color: rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(6px);
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+      padding: 40px;
+      box-sizing: border-box;
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 24px;
+      color: #fff;
+      margin-top: 0;
+    }
+
+    .checkbox-group {
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: column;
+      gap: 15px 25px;
+      justify-content: space-between;
+    }
+
+    .checkbox-group div {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 120px;
+    }
+
+    .checkbox-group label {
+      font-size: 17px;
+      color: #fff;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    label {
+      font-weight: bold;
+      font-size: 18px;
+      color: #ff9;
+      text-align: left;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="email"],
+    input[type="range"] {
+      width: 100%;
+      padding: 12px 15px;
+      font-size: 16px;
+      border-radius: 10px;
+      border: 2px solid #4b0082;
+      background-color: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      box-sizing: border-box;
+      transition: border-color 0.3s ease;
+      text-align: left;
+    }
+
+    input:focus {
+      border-color: #000;
+      outline: none;
+    }
+
+    button{
+      background-color: white;
+      color: #4b0082;
+      padding: 12px 30px;
+      font-size: 18px;
+      font-weight: bold;
+      border: 2px solid #4b0082;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      min-width: 160px;
+      text-align: center;
+    }
+
+    button:hover{
+      background-color: #000;
+      color: white;
+    }
+
+    .back-button {
+      display: block;
+      width: fit-content;
+      margin: 30px auto;
+      color: #ff6f61;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 10px 20px;
+      border: 2px solid #ff6f61;
+      border-radius: 6px;
+      transition: 0.3s;
+    }
+
+    .back-button:hover {
+      background-color: #ff6f61;
+      color: #000;
+    }
+
+    .product-info {
+      background: rgba(0,0,0,0.35);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 14px;
+      padding: 20px;
+      line-height: 1.9;
+    }
+
+    .alert {
+      background: rgba(255, 0, 0, 0.15);
+      border: 1px solid rgba(255, 0, 0, 0.4);
+      color: #ffd3d3;
+      padding: 12px 16px;
+      border-radius: 10px;
+      font-size: 15px;
+    }
+
+    .stack {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Edit Product</h1>
+
+  <div class="container">
+    <!-- Step 1: Search by SKU -->
+    <form id="searchForm" action="/edit/search" method="post" dir="ltr" class="stack">
+      <label for="skuSearch">Enter SKU Code:</label>
+      <input type="number" id="skuSearch" name="skuSearch" required />
+      <button type="submit">Search</button>
+      {% if error %}
+        <div class="alert">{{ error }}</div>
+      {% endif %}
+    </form>
+
+    <!-- Step 2: Show current info (if found) -->
+    {% if product %}
+      <div class="product-info">
+        <h2>Current Product Info</h2>
+        <p><b>Name:</b> {{ product.name }}</p>
+        <p><b>Category:</b> {{ product.cat }}</p>
+        <p><b>SKU:</b> {{ product.sku }}</p>
+        <p><b>Price:</b> {{ product.price }}</p>
+      </div>
+
+      <!-- Step 3: Select fields -->
+      <div class="checkbox-group">
+        <h2>Select One Or Many Of These Fields:</h2>
+
+        <div>
+          <input id="name0" type="checkbox"/>
+          <label for="name0">Name</label>
+        </div>
+
+        <div>
+          <input id="cat0" type="checkbox" />
+          <label for="cat0">Category</label>
+        </div>
+
+        <div>
+          <input id="sku0" type="checkbox"/>
+          <label for="sku0">SKU Code</label>
+        </div>
+
+        <div>
+          <input id="price0" type="checkbox" />
+          <label for="price0">Price</label>
+        </div>
+
+        <button type="button" onclick="checkbuy()">Continue</button>
+      </div>
+
+      <!-- Step 4: Edit form -->
+      <form id="from" action="/edit/pro" method="post" dir="ltr" style="display:none;">
+        <!-- current name for backend lookup -->
+        <input type="hidden" name="namea" value="{{ product.name }}">
+
+        <label for="name" style="display:none;">New Name: </label>
+        <input id="name" type="text" name="name" style="display:none;" >
+
+        <label for="sku" style="display:none;">New SKU Code: </label>
+        <input type="number" id="sku" name="sku" style="display:none;" >
+
+        <label for="price" style="display:none;">New Price: </label>
+        <input id="price" type="number" name="price" step="1" style="display:none;" >
+
+        <label for="cat" style="display:none;">New Category: </label>
+        <input type="text" id="cat" name="cat" style="display:none;" >
+
+        <button type="submit">Submit</button>
+      </form>
+    {% endif %}
+  </div>
+
+  <a href="/home/admin/manage" class="back-button">Back</a>
+
+  <script>
+    function checkbuy() {
+      const fromForm = document.getElementById('from');
+      if (!fromForm) return;
+
+      const fields = [
+        { checkboxId: 'name0', inputId: 'name' },
+        { checkboxId: 'cat0', inputId: 'cat' },
+        { checkboxId: 'sku0', inputId: 'sku' },
+        { checkboxId: 'price0', inputId: 'price' },
+      ];
+
+      fromForm.style.display = 'flex';
+      fromForm.style.flexDirection = 'column';
+
+      fields.forEach(({ checkboxId, inputId }) => {
+        const checkbox = document.getElementById(checkboxId);
+        const label = fromForm.querySelector(`label[for="${inputId}"]`);
+        const input = document.getElementById(inputId);
+
+        if (!checkbox || !label || !input) return;
+
+        if (checkbox.checked) {
+          label.style.display = 'block';
+          input.style.display = 'block';
+        } else {
+          label.style.display = 'none';
+          input.style.display = 'none';
+        }
+      });
+    }
+  </script>
+</body>
+</html>

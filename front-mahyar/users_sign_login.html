@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>User</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet" />
+
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: radial-gradient(circle at top, #360059, #1c002e);
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+      background-size: cover;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #f0f0f0;
+    }
+
+    .box {
+      background-color: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(4px);
+      padding: 50px 40px;
+      border-radius: 20px;
+      max-width: 500px;
+      width: 90%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+    }
+
+    h1 {
+      font-size: 48px;
+      font-family: 'Orbitron', sans-serif;
+      color: #ffccff;
+      margin-bottom: 40px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 30px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 25px;
+    }
+
+    .action-button {
+      text-decoration: none;
+      background-color: white;
+      border: 2px solid #4b0082;
+      color: #4b0082;
+      padding: 15px 40px;
+      border-radius: 10px;
+      font-size: 18px;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+
+    .action-button:hover {
+      background-color: #000000;
+      color: white;
+      border-color: #000000;
+    }
+
+    .back-button {
+      display: block;
+      width: fit-content;
+      color: #ff6f61;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 10px 20px;
+      border: 2px solid #ff6f61;
+      border-radius: 6px;
+      transition: 0.3s;
+    }
+
+    .back-button:hover {
+      background-color: #ff6f61;
+      color: #000;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h1>User</h1>
+
+    <div class="buttons">
+      <a href="/users/signup" class="action-button">Sign Up</a>
+      <a href="/users/login" class="action-button">Login</a>
+    </div>
+
+    <a href="/" class="back-button">Back</a>
+  </div>
+</body>
+</html>

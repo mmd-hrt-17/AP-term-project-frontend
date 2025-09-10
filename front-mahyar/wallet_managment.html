@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8">
+  <title>Wallet</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet" />
+  <style>
+  body {
+    margin: 0;
+    padding: 0;
+    background: radial-gradient(circle, #360059, #1c002e);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    direction: ltr;
+    color: #fff;
+  }
+
+  h2 {
+    text-align: center;
+    color: #fff;
+  }
+
+  h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 45px;
+      margin: 0;
+      padding: 30px 0;
+      text-align: center;
+      width: 100%;
+      background-color: #1c1c1c;
+      color: #f5f5f5;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+    }
+
+  .box {
+    background-color: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(8px);
+    margin: 100px auto;
+    padding: 40px 30px;
+    border-radius: 20px;
+    width: 80%;
+    max-width: 600px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+  }
+
+  .option {
+    margin-bottom: 20px;
+    font-size: 18px;
+  }
+
+  label {
+    margin-right: 10px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  input[type="radio"] {
+    transform: scale(1.2);
+    margin-left: 10px;
+    cursor: pointer;
+  }
+
+  button[type="submit"] {
+    background-color: #4b0082;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 12px 25px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 25px auto 10px auto;
+    display: block;
+  }
+
+  button[type="submit"]:hover {
+    background-color: #6f00b8;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+    font-weight: bold;
+  }
+
+  #m, #a {
+    display: none;
+    margin-top: 30px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    font-size: 16px;
+  }
+
+  form input[type="number"],
+  form input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0 20px 0;
+    border-radius: 8px;
+    border: 1.5px solid #4b0082;
+    font-size: 16px;
+    background-color: #fff;
+    color: #000000;
+    box-sizing: border-box;
+  }
+
+  .back-button {
+      display: block;
+      width: fit-content;
+      margin: 30px auto;
+      color: #ff6f61;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 10px 20px;
+      border: 2px solid #ff6f61;
+      border-radius: 6px;
+      transition: 0.3s;
+    }
+
+  .back-button:hover {
+      background-color: #ff6f61;
+      color: #000;
+    }
+</style>
+
+</head>
+<body>
+  <h1>Wallet Managment</h1>
+  <div class="box">
+    <h2>Select One Option:</h2>
+
+    <div class="option">
+      <input id="a0" type="radio" name="a" />
+      <label for="a0">Charge Wallet</label>
+    </div>        
+
+    <div class="option">
+      <input id="m0" type="radio" name="a"/>
+      <label for="m0">Account Balance</label>
+    </div>
+
+    <button type="submit" onclick="checkbuy()">Submit</button>
+
+    <div id="m">
+      <p>User: <strong>{{name}}</strong><br> Your Account Balance: <strong>{{pol}}</strong> tooman</p>
+    </div>
+
+  <form id="a" action="/charge" method="post">
+    <label for="quan">Amount</label>
+    <input type="number" id="quan" name="toman" required>
+
+    <input type="hidden" name="uname" value="{{name}}">
+
+    <button type="submit">Submit</button>
+  </form>
+
+
+    <div>
+      <a href="/home/user" class="back-button">Back</a>
+    </div>
+  </div>
+
+  <script>
+    function checkbuy() {
+      let ismin = document.getElementById('m0').checked;
+      let ischange = document.getElementById('a0').checked;
+
+      document.getElementById('m').style.display = ismin ? "block" : "none";
+      document.getElementById('a').style.display = ischange ? "block" : "none";
+    }
+  </script>
+</body>
+</html>
